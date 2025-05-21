@@ -1,0 +1,44 @@
+{
+  "title": "AI Project Form",
+  "fields": [
+    { "name": "firstName", "label": "First Name", "type": "text", "placeholder": "First Name" },
+    { "name": "lastName", "label": "Last Name", "type": "text", "placeholder": "Last Name" },
+    { "name": "Manager", "label": "Project Manager", "type": "text", "placeholder": "Project Manager Name" },
+    { "name": "date", "label": "Date", "type": "date", "placeholder": "Date" },
+    { "name": "Sig", "label": "Sigle", "type": "text", "placeholder": "Sigle" },
+    { "name": "projectName", "label": "Project Name", "type": "text", "placeholder": "Project Name" }
+  ],
+  "fieldDescriptions": [
+    { "name": "description", "label": "Description", "type": "textarea", "placeholder": "Project Description" }
+  ],
+  "roles": [
+    { "label": "1 - I am deploying a project internally or externally (Deployer)", "value": "Deployer" },
+    { "label": "2 - I am developing a tool for MBDA or a client (Provider)", "value": "Provider" },
+    { "label": "3 - I am reselling an AI solution (Importer)", "value": "Importer" }
+  ],
+  "checkboxes": [
+    {
+      "id": "context",
+      "label": "Does your project relate to any of the following contexts?",
+      "options": [
+        { "id": "1", "label": "Subliminal techniques" },
+        { "id": "2", "label": "Exploring vulnerabilities" },
+        { "id": "3", "label": "Biometric categorisation" }
+      ]
+    },
+    {
+      "id": "sector",
+      "label": "Sectors involved",
+      "options": [
+        { "id": "1", "label": "Defense" },
+        { "id": "2", "label": "Healthcare" },
+        { "id": "3", "label": "Finance" }
+      ]
+    }
+  ],
+  "radioQuestions": {
+    "usesAI": "Does your project use AI?",
+    "automatedDecision": "Does your project include automated decision-making?"
+  }
+}
+
