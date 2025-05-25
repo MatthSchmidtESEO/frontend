@@ -56,9 +56,28 @@ const Form = () => {
             }
         });
 
+        formContent.fieldDescriptions.forEach(fieldDescriptions => {
+            if (!formData[fieldDescriptions.name]?.trim()) {
+                newErrors[fieldDescriptions.name] = `${fieldDescriptions.label} is required`;
+            }
+        });
+
         if (!formData.radioRole) {
             newErrors.radioRole = 'Please select a role';
         }
+
+        formContent.checkboxes.forEach(section => {
+            const isChecked = Object.values(formData.checkboxes[section.id] || {}).some(Boolean);
+            if (!isChecked) {
+                newErrors[section.id] = `Please select at least one option in ${section.label}`;
+            }
+        });
+
+        Object.entries(formContent.radioQuestions).forEach(([key, question]) => {
+            if (!formData.radioQuestions[key]) {
+                newErrors.radioQuestions = `Please answer the question: ${question}`;
+            }
+        });
 
         setErrors(newErrors);
         if (Object.keys(newErrors).length > 0) {
@@ -125,16 +144,21 @@ const Form = () => {
             {formContent.checkboxes.map(section => (
                 <div key={section.id}>
                     <h3>{section.label}</h3>
-                    {section.options.map(option => (
-                        <label key={option.id}>
-                            <input
-                                type="checkbox"
-                                checked={formData.checkboxes?.[section.id]?.[option.id] || false}
-                                onChange={() => handleCheckboxChange(section.id, option.id)}
-                            />
-                            {option.label}
-                        </label>
-                    ))}
+                    {section.options.map(option => {
+                        const id = `${section.id}-${option.id}`;
+                        return (
+                            <div key={option.id}>
+                                <input
+                                    id={id}
+                                    type="checkbox"
+                                    checked={formData.checkboxes?.[section.id]?.[option.id] || false}
+                                    onChange={() => handleCheckboxChange(section.id, option.id)}
+                                />
+                                <label htmlFor={id}>{option.label}</label>
+                            </div>
+                        );
+                    })}
+                    {errors[section.id] && <span className="error-text">{errors[section.id]}</span>}
                 </div>
             ))}
 
